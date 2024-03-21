@@ -1,10 +1,12 @@
-import Header from "../components/Header";
+import Sale from "../components/sale";
+import Tariff from "../components/tariff";
 
 function App() {
     return (
-        <article className="container mx-auto">
-            <Header />
-        </article>
+        <>
+            <Sale />
+            <Tariff />
+        </>
     );
 }
 
