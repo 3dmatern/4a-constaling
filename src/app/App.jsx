@@ -2,22 +2,27 @@ import { ModalSaleStop } from "../components/ModalSaleStop";
 import Sale from "../components/sale";
 import Tariff from "../components/tariff";
 
+import { useTimer } from "../hooks/useTimer";
 import { useAppForm } from "../hooks/useAppForm";
 
 function App() {
     const {
-        tariffs,
-        period,
-        isRight,
+        minutesString,
+        isDanger,
+        secondsString,
         isOpenModal,
-        onChangePeriod,
-        onChangeRight,
         onCloseModal,
-    } = useAppForm();
+    } = useTimer();
+    const { tariffs, period, isRight, onChangePeriod, onChangeRight } =
+        useAppForm({ isOpenModal });
 
     return (
         <>
-            <Sale />
+            <Sale
+                minutes={minutesString}
+                seconds={secondsString}
+                isDanger={isDanger}
+            />
             <Tariff
                 tariffs={tariffs}
                 period={period}

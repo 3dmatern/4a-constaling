@@ -127,6 +127,7 @@ const TariffForm = ({
                             w-full block mt-[22px] py-[28px] text-center uppercase text-white
                             font-['Rubik'] font-medium text-xl leading-5 bg-orange-main
                             rounded-[60px] md:max-w-[281px] md:mt-[50px] md:mb-[30px]
+                            animate-pulsButton
                         `}
                     >
                         Купить

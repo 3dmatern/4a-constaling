@@ -32,6 +32,15 @@ export default {
                 ...defaultTheme.fontFamily.sans,
             ],
         },
+        keyframes: {
+            pulsButton: {
+                from: { backgroundColor: "rgba(253, 77, 53, 1)" },
+                to: { backgroundColor: "rgba(253, 77, 53, 0.5)" },
+            },
+        },
+        animation: {
+            pulsButton: "pulsButton 1s ease-in infinite alternate",
+        },
     },
     plugins: [],
 };

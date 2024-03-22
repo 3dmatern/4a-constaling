@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
-import { TARIFFS } from "./constants";
 
-export const useAppForm = () => {
+export const useAppForm = ({ isOpenModal }) => {
     const [tariffs, setTariffs] = useState([]);
     const [period, setPeriod] = useState("");
     const [isRight, setIsRight] = useState(false);
-    const [isOpenModal, setIsOpenModal] = useState(true);
 
     useEffect(() => {
-        const getData = async () => {
-            const data = await TARIFFS;
-
-            setTariffs((prev) => data);
-        };
-
-        getData();
+        fetch("https://t-pay.iqfit.app/subscribe/list-test")
+            .then((res) => res.json())
+            .then((data) => setTariffs((prev) => data))
+            .catch((err) => console.error(err));
     }, []);
+
+    useEffect(() => {
+        if (isOpenModal) {
+            setIsRight((prev) => true);
+        }
+    }, [isOpenModal]);
 
     const handleChangePeriod = ({ target }) => {
         setPeriod((prev) => target.value);
@@ -25,17 +26,11 @@ export const useAppForm = () => {
         setIsRight((prev) => !prev);
     };
 
-    const handleCloseModal = () => {
-        setIsOpenModal((prev) => false);
-    };
-
     return {
         tariffs,
         period,
         isRight,
-        isOpenModal,
         onChangePeriod: handleChangePeriod,
         onChangeRight: handleChangeRight,
-        onCloseModal: handleCloseModal,
     };
 };

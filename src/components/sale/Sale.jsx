@@ -3,21 +3,23 @@ import { SaleTimer } from "./SaleTimer";
 import { SaleTimerCard } from "./ui/SaleTimerCard";
 import { UiContainer } from "../uikit/UiContainer";
 
-const Sale = () => {
+const Sale = ({ minutes, seconds, isDanger }) => {
     return (
         <SaleContainer>
             <UiContainer>
                 <SaleTimer>
                     <SaleTimer.Description description="Скидка действует:" />
 
-                    <SaleTimerCard>
+                    <SaleTimerCard
+                        className={isDanger ? "text-orange-main" : ""}
+                    >
                         <SaleTimerCard.Count
-                            count={"09"}
+                            count={minutes}
                             description={"часов"}
                         />
                         <SaleTimerCard.Divider />
                         <SaleTimerCard.Count
-                            count={"59"}
+                            count={seconds}
                             description={"минут"}
                         />
                     </SaleTimerCard>
