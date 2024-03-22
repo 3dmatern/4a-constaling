@@ -3,86 +3,18 @@ import { useState } from "react";
 import PosterImage from "./images/man.png";
 
 import { TariffPoster } from "./ui/TariffPoster";
-import { TariffFormRadio } from "./ui/TariffFormRadio";
+import { TariffFormRadio } from "../uikit/TariffFormRadio";
 import { TariffFormCheck } from "./ui/TariffFormCheck";
 
-const TARIFFS = [
-    {
-        name: "1 месяц",
-        description: "Чтобы просто начать 👍🏻",
-        price: 699,
-        lengthInDays: 0,
-        isPopular: true,
-        isEndless: false,
-        isDiscount: false,
-        nonDiscountId: null,
-        id: "f347d050-073c-4969-ae91-7346f935cf70",
-        ownerId: "00000000-0000-0000-0000-000000000000",
-        statusId: null,
-        creationDateTime: "2024-03-07T14:18:38.5451758+03:00",
-        deleted: false,
-    },
-    {
-        name: "3 месяца",
-        description: "Привести тело впорядок 💪🏻",
-        price: 999,
-        lengthInDays: 0,
-        isPopular: true,
-        isEndless: false,
-        isDiscount: false,
-        nonDiscountId: null,
-        id: "f347d050-073c-4969-ae91-7346f935cf71",
-        ownerId: "00000000-0000-0000-0000-000000000000",
-        statusId: null,
-        creationDateTime: "2024-03-07T14:18:38.5451758+03:00",
-        deleted: false,
-    },
-    {
-        name: "1 год",
-        description: "Изменить образ жизни🔥",
-        price: 2990,
-        lengthInDays: 0,
-        isPopular: true,
-        isEndless: false,
-        isDiscount: false,
-        nonDiscountId: null,
-        id: "f347d050-073c-4969-ae91-7346f935cf72",
-        ownerId: "00000000-0000-0000-0000-000000000000",
-        statusId: null,
-        creationDateTime: "2024-03-07T14:18:38.5451758+03:00",
-        deleted: false,
-    },
-    {
-        name: "навсегда",
-        description: "Всегда быть в форме ⭐️",
-        price: 5990,
-        lengthInDays: 0,
-        isPopular: true,
-        isEndless: false,
-        isDiscount: false,
-        nonDiscountId: null,
-        id: "f347d050-073c-4969-ae91-7346f935cf73",
-        ownerId: "00000000-0000-0000-0000-000000000000",
-        statusId: null,
-        creationDateTime: "2024-03-07T14:18:38.5451758+03:00",
-        deleted: false,
-    },
-];
-
-const TariffForm = () => {
-    const [period, setPeriod] = useState("");
-    const [isRight, setIsRight] = useState(false);
-
-    const handleChangePeriod = ({ target }) => {
-        setPeriod((prev) => target.value);
-    };
-
-    const handleChangeRight = () => {
-        setIsRight((prev) => !prev);
-    };
-
+const TariffForm = ({
+    tariffs,
+    period,
+    isRight,
+    onChangePeriod,
+    onChangeRight,
+}) => {
     return (
-        <form action="" className="w-full">
+        <div className="w-full">
             <div
                 className={`
                     flex flex-col items-center gap-2.5 md:gap-8
@@ -91,21 +23,21 @@ const TariffForm = () => {
             >
                 <TariffPoster src={PosterImage} alt="poster" />
 
-                <div className="max-w-[585px] w-full">
+                <form action="" className="max-w-[585px] w-full">
                     <div
                         className={`
                             flex flex-col items-center gap-2.5 mx-auto 
                             md:flex-row md:flex-wrap md:gap-3
                         `}
                     >
-                        {TARIFFS.slice(0, TARIFFS.length - 1).map((tariff) => (
+                        {tariffs?.slice(0, tariffs.length - 1).map((tariff) => (
                             <TariffFormRadio
                                 key={tariff.id}
-                                percent={30}
                                 name="period"
                                 value={tariff.name}
+                                percent={30}
                                 isChecked={period === tariff.name}
-                                onChange={handleChangePeriod}
+                                onChange={onChangePeriod}
                             >
                                 <TariffFormRadio.Content>
                                     <TariffFormRadio.ContentTitle
@@ -114,6 +46,7 @@ const TariffForm = () => {
                                     <TariffFormRadio.ContentPrice
                                         price={tariff.price}
                                         salePrice={tariff.price + 500}
+                                        percent={30}
                                     />
                                 </TariffFormRadio.Content>
                                 <TariffFormRadio.Description
@@ -122,14 +55,14 @@ const TariffForm = () => {
                                 />
                             </TariffFormRadio>
                         ))}
-                        {TARIFFS.slice(TARIFFS.length - 1).map((tariff) => (
+                        {tariffs.slice(tariffs.length - 1).map((tariff) => (
                             <TariffFormRadio
                                 key={tariff.id}
-                                percent={30}
                                 name="period"
                                 value={tariff.name}
+                                percent={30}
                                 isChecked={period === tariff.name}
-                                onChange={handleChangePeriod}
+                                onChange={onChangePeriod}
                                 className={`
                                     md:max-w-full md:flex-row md:items-center md:mt-[28px] md:pt-6 md:pb-6 
                                     md:gap-0 md:basis-full
@@ -144,6 +77,7 @@ const TariffForm = () => {
                                     <TariffFormRadio.ContentPrice
                                         price={tariff.price}
                                         salePrice={tariff.price + 500}
+                                        percent={30}
                                         className={`
                                             md:mt-0 md:mb-0 md:ml-[20px] md:mr-[55px]
                                         `}
@@ -184,7 +118,7 @@ const TariffForm = () => {
                                 .
                             </p>
                         }
-                        onChange={handleChangeRight}
+                        onChange={onChangeRight}
                         className="max-w-[418px]"
                     />
 
@@ -205,9 +139,9 @@ const TariffForm = () => {
                         участвующим в акции осуществляются по полной стоимости
                         согласно оферте.
                     </p>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     );
 };
 
