@@ -4,17 +4,10 @@ import Tariff from "../components/tariff";
 import { useAppForm } from "../hooks/useAppForm";
 
 function App() {
-    // const {
-    //     minutesString,
-    //     isDanger,
-    //     secondsString,
-    //     isOpenModal,
-    //     onCloseModal,
-    // } = useTimer();
     const { tariffs, period, isRight, onChangePeriod, onChangeRight } =
         useAppForm();
 
-    console.log(tariffs);
+    // console.log(tariffs);
 
     return (
         <>

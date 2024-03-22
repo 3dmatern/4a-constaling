@@ -133,6 +133,7 @@ export const ModalSaleStop = ({
                     </div>
 
                     <button
+                        type="button"
                         className={`
                             w-full block py-[21px] text-center text-white
                             font-['Rubik'] font-medium text-xl leading-5 bg-orange-main

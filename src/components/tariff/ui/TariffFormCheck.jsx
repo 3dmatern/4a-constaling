@@ -21,7 +21,7 @@ export const TariffFormCheck = ({
                     `
                         min-w-6 max-w-6 min-h-6 max-h-6 flex flex-col items-center justify-center
                         border border-teal-main rounded-[4.8px] bg-white 
-                        relative z-0
+                        relative z-0 
                     `,
                     isRight && "text-white bg-teal-main"
                 )}
@@ -33,7 +33,7 @@ export const TariffFormCheck = ({
                     defaultChecked={isRight}
                     onChange={onChange}
                     className={`
-                        absolute inset-0 opacity-0 border-teal-main bg-teal-main
+                        absolute inset-0 opacity-0 border-teal-main bg-teal-main cursor-pointer
                     `}
                 />
             </div>

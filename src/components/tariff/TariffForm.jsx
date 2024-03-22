@@ -123,6 +123,7 @@ const TariffForm = ({
                     />
 
                     <button
+                        type="button"
                         className={`
                             w-full block mt-[22px] py-[28px] text-center uppercase text-white
                             font-['Rubik'] font-medium text-xl leading-5 bg-orange-main
