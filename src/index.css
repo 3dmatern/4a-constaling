@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    @font-face {
+        font-family: "PT Root UI";
+        font-display: swap;
+        src: url(./assets/fonts/ptrootui/PTRootUIVF.woff2) format("woff2");
+    }
+}
+
 html,
 body {
     height: 100%;
