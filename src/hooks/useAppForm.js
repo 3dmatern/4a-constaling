@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export const useAppForm = ({ isOpenModal }) => {
+export const useAppForm = () => {
     const [tariffs, setTariffs] = useState([]);
     const [period, setPeriod] = useState("");
     const [isRight, setIsRight] = useState(false);
@@ -12,19 +12,13 @@ export const useAppForm = ({ isOpenModal }) => {
             .catch((err) => console.error(err));
     }, []);
 
-    useEffect(() => {
-        if (isOpenModal) {
-            setIsRight((prev) => true);
-        }
-    }, [isOpenModal]);
-
     const handleChangePeriod = ({ target }) => {
         setPeriod((prev) => target.value);
     };
 
-    const handleChangeRight = () => {
+    const handleChangeRight = useCallback(() => {
         setIsRight((prev) => !prev);
-    };
+    }, []);
 
     return {
         tariffs,
