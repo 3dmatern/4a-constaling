@@ -18,7 +18,14 @@ SaleTimer.Description = function SaleTimerDescription({
     description,
 }) {
     return (
-        <p className={cn("font-medium text-base leading-[20.8px]", className)}>
+        <p
+            className={cn(
+                `
+                    font-medium text-base leading-[20.8px] md:font-bold md:text-3xl md:leading-[39px]
+                `,
+                className
+            )}
+        >
             {description}
         </p>
     );

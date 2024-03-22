@@ -17,17 +17,19 @@ export const TariffFormCard = ({
         <label
             className={cn(
                 `
-                    w-[335px] pt-9 pb-[26px] pl-6 relative
-                    flex items-center gap-6
-                    border-2 border-stone-300 rounded-[20px] 
-                    bg-white cursor-pointer
+                    w-[335px] pt-9 pb-[26px] px-6 relative flex items-center gap-6
+                    border-2 border-stone-300 rounded-[20px] bg-white cursor-pointer
+                    hover:border-teal-main hover:bg-teal-main/05 transition-colors
+                    md:w-[187px] md:h-[261px] md:pt-[45px] md:px-[31px]
                 `,
                 isChecked && "border-teal-main bg-teal-main/05",
                 className
             )}
         >
             <div
-                className={`min-w-[100px] max-w-[102px] flex flex-col items-start gap-[18px]`}
+                className={`
+                    min-w-[100px] max-w-[102px] flex flex-col items-start gap-[18px]
+                `}
             >
                 <h5
                     className={`
@@ -37,6 +39,21 @@ export const TariffFormCard = ({
                 >
                     {title}
                 </h5>
+
+                <div className={`flex flex-col items-end`}>
+                    <p className="font-bold text-[44px] leading-[48.4px]">
+                        {price}₽
+                    </p>
+                    <p
+                        className={`
+                        font-medium text-xl leading-[22px] text-slate-400
+                        line-through
+                    `}
+                    >
+                        {salePrice}₽
+                    </p>
+                </div>
+
                 <p
                     className={`font-medium text-sm leading-[18.2px] text-black-desc-tariff`}
                 >
@@ -44,26 +61,13 @@ export const TariffFormCard = ({
                 </p>
             </div>
 
-            <div className={`flex flex-col items-end`}>
-                <p className="font-bold text-[44px] leading-[48.4px]">
-                    {price}₽
-                </p>
-                <p
-                    className={`
-                        font-medium text-xl leading-[22px] text-slate-400
-                        line-through
-                    `}
-                >
-                    {salePrice}₽
-                </p>
-            </div>
             <input
                 type="radio"
                 name={name}
                 value={value}
                 checked={isChecked}
                 onChange={onChange}
-                className="absolute inset-0 opacity-0"
+                className="absolute inset-0 opacity-0 -z-[1]"
             />
 
             <div

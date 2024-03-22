@@ -6,7 +6,7 @@ import TariffForm from "./TariffForm";
 const Tariff = () => {
     return (
         <TariffContainer>
-            <UiContainer className="flex flex-col items-center gap-5">
+            <UiContainer className="flex flex-col items-center gap-5 md:gap-[68px]">
                 <TariffHeadding title="Выберите подходящий тарифный план" />
                 <TariffForm />
             </UiContainer>

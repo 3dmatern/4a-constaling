@@ -4,7 +4,6 @@ import PosterImage from "./images/man.png";
 
 import { TariffPoster } from "./ui/TariffPoster";
 import { TariffFormCard } from "./ui/TariffFormCard";
-import { cn } from "../../../lib/utils";
 import { TariffFormCheck } from "./ui/TariffFormCheck";
 
 const TARIFFS = [
@@ -84,11 +83,20 @@ const TariffForm = () => {
 
     return (
         <form action="">
-            <div className="flex flex-col items-center gap-2.5">
+            <div
+                className={`
+                    flex flex-col items-center gap-2.5 md:flex-row md:gap-[79px] md:items-start
+                    md:justify-center
+                `}
+            >
                 <TariffPoster src={PosterImage} alt="poster" />
 
                 <div className="flex flex-col items-start gap-3">
-                    <div className="flex flex-col items-center gap-2.5 mx-auto">
+                    <div
+                        className={`
+                            flex flex-col items-center gap-2.5 mx-auto md:flex-row md:flex-wrap
+                        `}
+                    >
                         {TARIFFS.slice(0, TARIFFS.length - 1).map((tariff) => (
                             <TariffFormCard
                                 key={tariff.id}

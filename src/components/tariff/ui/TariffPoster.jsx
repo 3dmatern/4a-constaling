@@ -6,7 +6,12 @@ export const TariffPoster = ({ className, src, alt }) => {
             <img
                 src={src}
                 alt={alt}
-                className={cn(`max-w-[277px] max-h-[441px]`, className)}
+                className={cn(
+                    `
+                        max-w-[277px] max-h-[441px] md:max-w-[434px] md:max-h-[715px]
+                    `,
+                    className
+                )}
             />
         </picture>
     );

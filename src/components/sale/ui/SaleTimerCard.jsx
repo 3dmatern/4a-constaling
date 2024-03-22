@@ -18,12 +18,18 @@ SaleTimerCard.Count = function SaleTimerCardCount({ count, description }) {
         <div className="size-16 flex flex-col items-center justify-center gap-0">
             <p
                 className={`
-                                font-['Bebas_Neue'] font-normal text-[40px] leading-[41.2px]
-                            `}
+                    font-['Bebas_Neue'] text-[40px] leading-[40px]
+                    md:text-[60px] md:leading-[50px]
+                `}
             >
                 {count}
             </p>
-            <p className="text-sm leading-[18.2px] text-gray-main">
+            <p
+                className={`
+                    text-[14px] leading-[14px] text-gray-main font-medium
+                    md:text-[16px] md:font-bold
+                `}
+            >
                 {description}
             </p>
         </div>
