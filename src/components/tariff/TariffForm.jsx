@@ -3,7 +3,7 @@ import { useState } from "react";
 import PosterImage from "./images/man.png";
 
 import { TariffPoster } from "./ui/TariffPoster";
-import { TariffFormCard } from "./ui/TariffFormCard";
+import { TariffFormRadio } from "./ui/TariffFormRadio";
 import { TariffFormCheck } from "./ui/TariffFormCheck";
 
 const TARIFFS = [
@@ -82,55 +82,85 @@ const TariffForm = () => {
     };
 
     return (
-        <form action="">
+        <form action="" className="w-full">
             <div
                 className={`
-                    flex flex-col items-center gap-2.5 md:flex-row md:gap-[79px] md:items-start
-                    md:justify-center
+                    flex flex-col items-center gap-2.5 md:gap-8
+                    lg:flex-row lg:items-start lg:justify-center lg:gap-[79px]
                 `}
             >
                 <TariffPoster src={PosterImage} alt="poster" />
 
-                <div className="flex flex-col items-start gap-3">
+                <div className="max-w-[585px] w-full">
                     <div
                         className={`
-                            flex flex-col items-center gap-2.5 mx-auto md:flex-row md:flex-wrap
+                            flex flex-col items-center gap-2.5 mx-auto 
+                            md:flex-row md:flex-wrap md:gap-3
                         `}
                     >
                         {TARIFFS.slice(0, TARIFFS.length - 1).map((tariff) => (
-                            <TariffFormCard
+                            <TariffFormRadio
                                 key={tariff.id}
                                 percent={30}
-                                title={tariff.name}
-                                description={tariff.description}
-                                price={tariff.price}
-                                salePrice={tariff.price + 500}
                                 name="period"
                                 value={tariff.name}
                                 isChecked={period === tariff.name}
                                 onChange={handleChangePeriod}
-                            />
+                            >
+                                <TariffFormRadio.Content>
+                                    <TariffFormRadio.ContentTitle
+                                        title={tariff.name}
+                                    />
+                                    <TariffFormRadio.ContentPrice
+                                        price={tariff.price}
+                                        salePrice={tariff.price + 500}
+                                    />
+                                </TariffFormRadio.Content>
+                                <TariffFormRadio.Description
+                                    description={tariff.description}
+                                    className={`md:mx-auto md:text-center`}
+                                />
+                            </TariffFormRadio>
                         ))}
                         {TARIFFS.slice(TARIFFS.length - 1).map((tariff) => (
-                            <TariffFormCard
+                            <TariffFormRadio
                                 key={tariff.id}
                                 percent={30}
-                                title={tariff.name}
-                                description={tariff.description}
-                                price={tariff.price}
-                                salePrice={tariff.price + 500}
                                 name="period"
                                 value={tariff.name}
                                 isChecked={period === tariff.name}
                                 onChange={handleChangePeriod}
-                            />
+                                className={`
+                                    md:max-w-full md:flex-row md:items-center md:mt-[28px] md:pt-6 md:pb-6 
+                                    md:gap-0 md:basis-full
+                                `}
+                            >
+                                <TariffFormRadio.Content
+                                    className={`flex-row items-baseline`}
+                                >
+                                    <TariffFormRadio.ContentTitle
+                                        title={tariff.name}
+                                    />
+                                    <TariffFormRadio.ContentPrice
+                                        price={tariff.price}
+                                        salePrice={tariff.price + 500}
+                                        className={`
+                                            md:mt-0 md:mb-0 md:ml-[20px] md:mr-[55px]
+                                        `}
+                                    />
+                                </TariffFormRadio.Content>
+
+                                <TariffFormRadio.Description
+                                    description={tariff.description}
+                                />
+                            </TariffFormRadio>
                         ))}
                     </div>
 
                     <p
                         className={`
-                            max-w-[284px] font-medium text-sm leading-[18.2px] 
-                            text-black-desc-tariff
+                            max-w-[284px] mt-3 mb-[27px] font-medium text-sm leading-[18.2px] 
+                            text-black-desc-tariff md:max-w-full md:text-lg md:leading-[23.4px]
                         `}
                     >
                         Следуя плану на 3 месяца, люди получают в 2 раза лучший
@@ -155,18 +185,26 @@ const TariffForm = () => {
                             </p>
                         }
                         onChange={handleChangeRight}
-                        className="mt-9 mb-[22px]"
+                        className="max-w-[418px]"
                     />
 
                     <button
                         className={`
-                            w-full block py-[28px] text-center uppercase text-white
+                            w-full block mt-[22px] py-[28px] text-center uppercase text-white
                             font-['Rubik'] font-medium text-xl leading-5 bg-orange-main
-                            rounded-[60px]
+                            rounded-[60px] md:max-w-[281px] md:mt-[50px] md:mb-[30px]
                         `}
                     >
                         Купить
                     </button>
+
+                    <p className="hidden text-sm leading-[18.2px] font-normal text-gray-main md:block">
+                        Нажимая «Купить», Пользователь соглашается на
+                        автоматическое списание денежных средств по истечению
+                        купленного периода. Дальнейшие списания по тарифам
+                        участвующим в акции осуществляются по полной стоимости
+                        согласно оферте.
+                    </p>
                 </div>
             </div>
         </form>

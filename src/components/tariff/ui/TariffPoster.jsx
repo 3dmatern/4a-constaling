@@ -8,7 +8,7 @@ export const TariffPoster = ({ className, src, alt }) => {
                 alt={alt}
                 className={cn(
                     `
-                        max-w-[277px] max-h-[441px] md:max-w-[434px] md:max-h-[715px]
+                        max-w-[277px] max-h-[441px] xl:max-w-[434px] xl:max-h-[715px]
                     `,
                     className
                 )}
