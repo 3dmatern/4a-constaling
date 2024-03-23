@@ -6,7 +6,7 @@ import { SaleTimerCard } from "./ui/SaleTimerCard";
 import { UiContainer } from "../uikit/UiContainer";
 import { ModalSaleStop } from "../ModalSaleStop";
 
-const SECONDS = 5;
+const SECONDS = 120;
 
 const Sale = ({
     tariffs,
