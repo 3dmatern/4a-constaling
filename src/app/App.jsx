@@ -4,23 +4,31 @@ import Tariff from "../components/tariff";
 import { useAppForm } from "../hooks/useAppForm";
 
 function App() {
-    const { tariffs, period, isRight, onChangePeriod, onChangeRight } =
-        useAppForm();
-
-    // console.log(tariffs);
+    const {
+        isPopularTariffs,
+        isDiscountTariffs,
+        period,
+        isRight,
+        isTimer,
+        onChangePeriod,
+        onChangeRight,
+        onChangeIsTimer,
+    } = useAppForm();
 
     return (
         <>
             <Sale
-                tariffs={tariffs}
+                tariffs={isDiscountTariffs}
                 period={period}
                 onChangePeriod={onChangePeriod}
                 onChangeRight={onChangeRight}
+                onChangeIsTimer={onChangeIsTimer}
             />
             <Tariff
-                tariffs={tariffs}
+                tariffs={isPopularTariffs}
                 period={period}
                 isRight={isRight}
+                isTimer={isTimer}
                 onChangePeriod={onChangePeriod}
                 onChangeRight={onChangeRight}
             />

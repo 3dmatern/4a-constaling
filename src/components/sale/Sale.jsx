@@ -1,19 +1,25 @@
+import { useEffect, useState } from "react";
+
 import { SaleContainer } from "./ui/SaleContainer";
 import { SaleTimer } from "./SaleTimer";
 import { SaleTimerCard } from "./ui/SaleTimerCard";
 import { UiContainer } from "../uikit/UiContainer";
 import { ModalSaleStop } from "../ModalSaleStop";
-import { useEffect, useState } from "react";
 
 const SECONDS = 5;
 
-const Sale = ({ tariffs, period, onChangePeriod, onChangeRight }) => {
+const Sale = ({
+    tariffs,
+    period,
+    onChangePeriod,
+    onChangeRight,
+    onChangeIsTimer,
+}) => {
     const [seconds, setSeconds] = useState(SECONDS);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const minutesString = String(Math.floor(seconds / 60)).padStart(2, "0");
     const secondsString = String(seconds % 60).padStart(2, "0");
-    const isDanger = seconds < 30;
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -29,12 +35,21 @@ const Sale = ({ tariffs, period, onChangePeriod, onChangeRight }) => {
     useEffect(() => {
         if (seconds === 0) {
             setIsOpenModal((prev) => true);
+            onChangeIsTimer();
             onChangeRight();
         }
-    }, [onChangeRight, seconds]);
+    }, [onChangeIsTimer, onChangeRight, seconds]);
 
     const handleCloseModal = () => {
         setIsOpenModal((prev) => false);
+    };
+
+    const getClassNameTimer = () => {
+        if (seconds < 30 && seconds !== 0) {
+            return "animate-pulsTimer";
+        } else if (seconds === 0) {
+            return "animate-none text-orange-main";
+        }
     };
 
     return (
@@ -44,9 +59,7 @@ const Sale = ({ tariffs, period, onChangePeriod, onChangeRight }) => {
                     <SaleTimer>
                         <SaleTimer.Description description="Скидка действует:" />
 
-                        <SaleTimerCard
-                            className={isDanger ? "text-orange-main" : ""}
-                        >
+                        <SaleTimerCard className={getClassNameTimer()}>
                             <SaleTimerCard.Count
                                 count={minutesString}
                                 description={"часов"}

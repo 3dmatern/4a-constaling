@@ -1,14 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
 
 export const useAppForm = () => {
-    const [tariffs, setTariffs] = useState([]);
+    const [isPopularTariffs, setIsPopularTariffs] = useState([]);
+    const [isDiscountTariffs, setIsDiscountTariffs] = useState([]);
     const [period, setPeriod] = useState("");
+    const [isTimer, setIsTimer] = useState(false);
     const [isRight, setIsRight] = useState(false);
 
     useEffect(() => {
         fetch("https://t-pay.iqfit.app/subscribe/list-test")
             .then((res) => res.json())
-            .then((data) => setTariffs((prev) => data))
+            .then((data) => {
+                data.forEach((tariff) => {
+                    if (tariff.isPopular) {
+                        setIsPopularTariffs((prev) => {
+                            const prevTariffs = prev.slice();
+                            prevTariffs.push(tariff);
+                            return prevTariffs;
+                        });
+                    }
+
+                    if (tariff.isDiscount) {
+                        setIsDiscountTariffs((prev) => {
+                            const prevTariffs = prev.slice();
+                            prevTariffs.push(tariff);
+                            return prevTariffs;
+                        });
+                    }
+                });
+            })
             .catch((err) => console.error(err));
     }, []);
 
@@ -20,11 +40,18 @@ export const useAppForm = () => {
         setIsRight((prev) => !prev);
     }, []);
 
+    const handleChangeIsTimer = useCallback(() => {
+        setIsTimer((prev) => true);
+    }, []);
+
     return {
-        tariffs,
+        isPopularTariffs,
+        isDiscountTariffs,
         period,
         isRight,
+        isTimer,
         onChangePeriod: handleChangePeriod,
         onChangeRight: handleChangeRight,
+        onChangeIsTimer: handleChangeIsTimer,
     };
 };

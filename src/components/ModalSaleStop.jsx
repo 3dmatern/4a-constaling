@@ -1,5 +1,8 @@
-import { TariffFormRadio } from "./uikit/TariffFormRadio";
 import { UiModal } from "./uikit/UiModal";
+import { TariffFormRadio } from "./uikit/TariffFormRadio";
+import { getPrices } from "../../lib/getPrices";
+
+const PERCENT = [40, 50, 60];
 
 export const ModalSaleStop = ({
     tariffs,
@@ -95,41 +98,49 @@ export const ModalSaleStop = ({
                             md:flex-row md:flex-wrap md:gap-5
                         "
                     >
-                        {tariffs?.slice(0, tariffs.length - 1).map((tariff) => (
-                            <TariffFormRadio
-                                key={tariff.id}
-                                name="period"
-                                value={tariff.name}
-                                percent={30}
-                                isChecked={period === tariff.name}
-                                onChange={onChangePeriod}
-                                className="
+                        {tariffs?.slice(0, 3).map((tariff, index) => {
+                            const percent = PERCENT[index];
+                            const { salePrice, defaultPrice } = getPrices(
+                                tariff.price,
+                                percent
+                            );
+
+                            return (
+                                <TariffFormRadio
+                                    key={tariff.id}
+                                    name="period"
+                                    value={tariff.name}
+                                    percent={30}
+                                    isChecked={period === tariff.name}
+                                    onChange={onChangePeriod}
+                                    className="
                                     pt-6 px-5 pb-[18px] md:pt-[26px] md:px-0 md:pl-[26px] md:pr-[22px] md:pb-5
                                     md:max-w-[210px]
                                 "
-                                isModal
-                            >
-                                <TariffFormRadio.Content className="gap-[19px] md:gap-0">
-                                    <TariffFormRadio.ContentTitle
-                                        title={tariff.name}
-                                        className="
+                                    isModal
+                                >
+                                    <TariffFormRadio.Content className="gap-[19px] md:gap-0">
+                                        <TariffFormRadio.ContentTitle
+                                            title={tariff.name}
+                                            className="
                                             text-stone-800 md:text-[26px] md:leading-[26px] md:pb-[50px]
                                         "
-                                    />
-                                    <Divider />
-                                    <TariffFormRadio.ContentPrice
-                                        price={tariff.price}
-                                        salePrice={tariff.price + 500}
-                                        percent={30}
-                                        isModal
-                                        className="
-                                            static min-h-max text-stone-800
-                                            md:w-max md:min-h-max md:mt-9 md:mb-0
-                                        "
-                                    />
-                                </TariffFormRadio.Content>
-                            </TariffFormRadio>
-                        ))}
+                                        />
+                                        <Divider />
+                                        <TariffFormRadio.ContentPrice
+                                            price={salePrice}
+                                            salePrice={defaultPrice}
+                                            percent={percent}
+                                            isModal
+                                            className="
+                                                static min-h-max text-stone-800
+                                                md:w-max md:min-h-max md:mt-9 md:mb-0
+                                            "
+                                        />
+                                    </TariffFormRadio.Content>
+                                </TariffFormRadio>
+                            );
+                        })}
                     </div>
 
                     <button

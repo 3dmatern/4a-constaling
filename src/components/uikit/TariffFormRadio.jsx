@@ -118,16 +118,7 @@ TariffFormRadio.ContentPrice = function TariffFormRadioContentPrice({
                 )}
             >
                 {price}₽
-                {isModal && (
-                    <SaleStar
-                        percent={percent}
-                        className={
-                            isModal
-                                ? "-top-[25px] left-[calc(100%+6px)] md:left-full"
-                                : ""
-                        }
-                    />
-                )}
+                {isModal && <SaleStar isModal={isModal} percent={percent} />}
             </p>
             {salePrice && (
                 <p
@@ -174,23 +165,32 @@ TariffFormRadio.Description = function TariffFormRadioDescription({
     );
 };
 
-const SaleStar = ({ className, percent }) => {
+const SaleStar = ({ className, percent, isModal }) => {
     return (
         <span
             className={cn(
                 `
                     size-[50px] flex flex-col items-center justify-center
                     text-[13.33px] leading-[17.33px] absolute top-1 right-[9px] z-0
-                    md:-top-[25px]
+                    md:size-[70px] md:text-[18.67px] md:leading-[24.27px] md:-top-[35px]
                 `,
+                isModal &&
+                    `
+                        -top-[25px] left-[calc(100%+6px)] md:size-[50px] md:text-[13.33px] 
+                        md:leading-[17.33px]
+                    `,
                 className
             )}
         >
             <SaleStarImage
-                className="
-                    absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-[1] 
-                    text-orange-main
-                "
+                className={cn(
+                    `
+                    size-[50px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 
+                    -z-[1] text-orange-main
+                    md:size-[70px]
+                `,
+                    isModal && "md:size-[50px]"
+                )}
             />
             <span
                 className="

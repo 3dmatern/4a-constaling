@@ -7,6 +7,7 @@ const Tariff = ({
     tariffs,
     period,
     isRight,
+    isTimer,
     onChangePeriod,
     onChangeRight,
 }) => {
@@ -18,6 +19,7 @@ const Tariff = ({
                     tariffs={tariffs}
                     period={period}
                     isRight={isRight}
+                    isTimer={isTimer}
                     onChangePeriod={onChangePeriod}
                     onChangeRight={onChangeRight}
                 />

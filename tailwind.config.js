@@ -33,12 +33,17 @@ export default {
             ],
         },
         keyframes: {
+            pulsTimer: {
+                from: { color: "rgba(253, 77, 53, 0.5)" },
+                to: { color: "rgba(255, 0, 0, 1)" },
+            },
             pulsButton: {
                 from: { backgroundColor: "rgba(253, 77, 53, 1)" },
                 to: { backgroundColor: "rgba(253, 77, 53, 0.5)" },
             },
         },
         animation: {
+            pulsTimer: "pulsTimer .5s ease-in infinite alternate",
             pulsButton: "pulsButton 1s ease-in infinite alternate",
         },
     },
